@@ -2,7 +2,7 @@
 
 Remote MCP server for Gemral Edge: point-in-time U.S. public-record data (federal contracts, congressional and insider trades, lobbying, regulatory publications) and AI-infrastructure physical data, for AI assistants.
 
-This repository holds the public metadata for the server (`server.json` for the official MCP Registry) and connection instructions. The server itself is hosted; there is no package to install.
+The server is hosted. This repository holds its public metadata (`server.json` for the official MCP Registry), connection instructions, and a small zero-dependency stdio proxy (`proxy.mjs`) for clients that only run local servers. The proxy forwards every request to the hosted server; it contains no data and no server code.
 
 - Every record is tied to the company and ticker that were valid on the day it became public.
 - Publication lags are applied, so the data can be joined without look-ahead.
@@ -38,6 +38,26 @@ Cursor, Windsurf and other clients that take a JSON config:
   }
 }
 ```
+
+### Local stdio proxy (npx or Docker)
+
+For clients that only launch local commands. Requires Node 18+.
+
+```json
+{
+  "mcpServers": {
+    "gemral-edge": {
+      "command": "npx",
+      "args": ["-y", "github:gemral-edge/gemral-edge-mcp"],
+      "env": { "GEMRAL_EDGE_API_KEY": "YOUR_GEMRAL_EDGE_KEY" }
+    }
+  }
+}
+```
+
+Docker: `docker build -t gemral-edge-mcp . && docker run -i --rm -e GEMRAL_EDGE_API_KEY=YOUR_GEMRAL_EDGE_KEY gemral-edge-mcp`
+
+Without `GEMRAL_EDGE_API_KEY` the proxy still answers `tools/list` from the bundled `tools.json` (generated from the hosted server's `tools/list`), and tool calls return a message explaining how to get access. No key? Connect your client to the server URL above instead and sign in with OAuth (free tier).
 
 ## Tools
 

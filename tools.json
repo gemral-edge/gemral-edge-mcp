@@ -1,0 +1,1925 @@
+[
+ {
+  "name": "get_company_exposure",
+  "title": "Company Convergence Exposure",
+  "description": "Convergence exposure of one US-listed company: government contracts, congressional trades, insider activity, lobbying velocity, tech-hiring signals, plus a composite signal score. Read-only evidence with provenance.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "ticker"
+   ],
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Stock ticker, e.g. PLTR"
+    },
+    "window_days": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 365,
+     "default": 90
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Company Convergence Exposure",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_event_expected_impact",
+  "title": "Event Expected Impact",
+  "description": "Historical outcome distribution for the pattern of a specific event (median return relative to sector, win/loss rate, drawdown, within-corpus control). Returns insufficient_sample when N is below the honesty gate.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "event_id"
+   ],
+   "properties": {
+    "event_id": {
+     "type": "string",
+     "description": "Event UUID"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Event Expected Impact",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_contract_beneficiaries",
+  "title": "Contract Beneficiaries",
+  "description": "Comprehensive intelligence feed covering major federal and defense procurement awards across civilian and military agencies, mapping prime contracts to parent corporate tickers.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "award_id": {
+     "type": "string"
+    },
+    "ticker": {
+     "type": "string"
+    },
+    "date": {
+     "type": "string",
+     "description": "ISO date upper bound"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Contract Beneficiaries",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_policy_affected_companies",
+  "title": "Policy-Affected Companies",
+  "description": "Quarter-over-quarter rate of change in disclosed federal lobbying expenditures mapping corporate policy influence, executive agency actions, and regulatory shifts directly to equities.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "document_number": {
+     "type": "string"
+    },
+    "query": {
+     "type": "string",
+     "description": "Title contains (max 120 chars)"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Policy-Affected Companies",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_signal_historical_outcomes",
+  "title": "Signal Historical Outcomes",
+  "description": "Historical simulation suite testing quantitative factor performance against political disclosures and defense awards. Returns insufficient_sample below the honesty N gate.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "pattern_key"
+   ],
+   "properties": {
+    "pattern_key": {
+     "type": "string",
+     "description": "e.g. congress_buy, gov_contract_ge3pct_mcap"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Signal Historical Outcomes",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "screen_convergence",
+  "title": "Convergence Screener",
+  "description": "Multi-stream algorithmic screening surfacing high-conviction tickers where independent federal contracts, insider buying, and congressional trade vectors align within a specified window.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "criteria"
+   ],
+   "properties": {
+    "criteria": {
+     "type": "object",
+     "properties": {
+      "require": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      },
+      "window_days": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 365,
+       "default": 30
+      },
+      "sector": {
+       "type": "string"
+      },
+      "limit": {
+       "type": "integer",
+       "minimum": 1,
+       "maximum": 200,
+       "default": 25
+      }
+     }
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Convergence Screener",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "explain_score",
+  "title": "Explain Signal Score",
+  "description": "Automated qualitative inference detailing operational catalysts, timing rationale, and cross-asset signal convergence factors (labels only, scoring weights never exposed).",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "ticker"
+   ],
+   "properties": {
+    "ticker": {
+     "type": "string"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Explain Signal Score",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_top_signals",
+  "title": "Top Convergence Signals",
+  "description": "Multi-stream algorithmic convergence surfacing when independent federal contracts, insider buying, and congressional trade vectors align on a single company. Current top-ranked signals with composite score and bias.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 200,
+     "default": 50
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "type": "array",
+     "description": "Ranked convergence signals (public columns only; scoring weights never exposed).",
+     "items": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+       "ticker": {
+        "type": "string"
+       },
+       "entity_name": {
+        "type": "string"
+       },
+       "entity_slug": {
+        "type": "string"
+       },
+       "alpha_score": {
+        "type": "number",
+        "description": "Composite signal score 0-100 (weights hidden)."
+       },
+       "bias": {
+        "type": "string"
+       },
+       "n_catalysts": {
+        "type": "integer"
+       },
+       "as_of": {
+        "type": "string"
+       },
+       "masked": {
+        "type": "boolean"
+       },
+       "deep_flow_active": {
+        "type": "boolean"
+       }
+      }
+     }
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Top Convergence Signals",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_leaderboard",
+  "title": "Congressional Trading Leaderboard",
+  "description": "Members of the U.S. Congress ranked by estimated returns on their publicly disclosed stock trades over a chosen window, with top holdings and filing coverage. Sourced from STOCK Act disclosures. Read-only evidence.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "window": {
+     "type": "string",
+     "enum": [
+      "1w",
+      "1m",
+      "1y",
+      "all"
+     ],
+     "default": "1y"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "type": "array",
+     "description": "Congressional trading leaderboard rows (public columns only).",
+     "items": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+       "rank": {
+        "type": "integer"
+       },
+       "name": {
+        "type": "string"
+       },
+       "party": {
+        "type": "string"
+       },
+       "state": {
+        "type": "string"
+       },
+       "chamber": {
+        "type": "string"
+       },
+       "slug": {
+        "type": "string"
+       },
+       "roi": {
+        "type": [
+         "number",
+         "null"
+        ]
+       },
+       "pnl_1y": {
+        "type": [
+         "number",
+         "null"
+        ]
+       },
+       "volume_total": {
+        "type": [
+         "number",
+         "null"
+        ]
+       },
+       "masked": {
+        "type": "boolean"
+       }
+      }
+     }
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Congressional Trading Leaderboard",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_track_record",
+  "title": "Public Track Record",
+  "description": "Point-in-time forecast ledger: forecasts are recorded before the outcome and scored after it resolves, with calibration, Brier score versus the base rate, and resolved receipts. forecast_scorecard holds the same numbers as gemral.com/edge/track-record for one outcome definition, one benchmark and one mode. Reports the measured numbers as they are; it is not a claim of outperformance.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "benchmark": {
+     "type": "string",
+     "enum": [
+      "sector_etf",
+      "spy"
+     ],
+     "default": "sector_etf"
+    },
+    "mode": {
+     "type": "string",
+     "enum": [
+      "pit_replay",
+      "live"
+     ],
+     "default": "pit_replay"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Public Track Record",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_forecast",
+  "title": "Machine Probability Forecast",
+  "description": "Quantitative probabilistic modeling forecasting sector-relative return distributions, confidence intervals, and realized outcome benchmarks with explicit is_backtest provenance flag.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "ticker"
+   ],
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Stock ticker, e.g. PLTR, NVDA"
+    },
+    "outcome_definition_id": {
+     "type": "string",
+     "description": "Canonical outcome definition ID (optional)"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "type": "object",
+     "description": "Machine probability forecast payload with explicit is_backtest provenance flag.",
+     "properties": {
+      "ticker": {
+       "type": "string"
+      },
+      "is_locked": {
+       "type": "boolean"
+      },
+      "is_backtest": {
+       "type": "boolean"
+      },
+      "latest": {
+       "type": "object"
+      },
+      "forecasts": {
+       "type": "array"
+      },
+      "total_count": {
+       "type": "integer"
+      }
+     }
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Machine Probability Forecast",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_ticker_intelligence",
+  "title": "Unified Ticker Intelligence",
+  "description": "One-ticker summary combining six public-record views: government contracts, policy exposure, insider transaction filings, management credibility, upcoming catalysts and historical signal outcomes. Read-only evidence.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "ticker"
+   ],
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Stock ticker, e.g. PLTR, NVDA"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Unified Ticker Intelligence",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_actor_profile",
+  "title": "Actor Habit Profile",
+  "description": "Deep profiling of individual lawmakers, agencies, and defense contractors including multi-year trade win-rates, committee jurisdictions, and legislative actions.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "actor_id"
+   ],
+   "properties": {
+    "actor_id": {
+     "type": "string",
+     "description": "Politician congressional member ID or Executive slug/CIK"
+    },
+    "actor_type": {
+     "type": "string",
+     "enum": [
+      "politician",
+      "agency",
+      "executive",
+      "activist_fund",
+      "insider"
+     ],
+     "default": "politician"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Actor Habit Profile",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_crypto_funding_extremes",
+  "title": "Crypto Funding Rate Extremes",
+  "description": "Top cryptocurrency perpetual futures contracts with extreme positive or negative funding rates across exchanges. Sourced from live exchange funding intervals. Read-only evidence.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "direction": {
+     "type": "string",
+     "enum": [
+      "negative",
+      "positive",
+      "all"
+     ],
+     "default": "negative",
+     "description": "Direction of funding extremes"
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 50,
+     "default": 10
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Crypto Funding Rate Extremes",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_onchain_whale_flows",
+  "title": "On-chain DEX Whale Swaps",
+  "description": "On-chain decentralized exchange (DEX) large-scale swaps and liquidity pool transactions across tracked smart money wallets and verified token pools. Read-only evidence.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "token_symbol": {
+     "type": "string",
+     "description": "Token symbol, e.g. SOL, ETH"
+    },
+    "chain": {
+     "type": "string",
+     "description": "Blockchain network, e.g. solana, ethereum, arbitrum, base"
+    },
+    "min_usd": {
+     "type": "number",
+     "minimum": 1000,
+     "default": 50000,
+     "description": "Minimum swap volume in USD"
+    },
+    "window_hours": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 72,
+     "default": 24,
+     "description": "Time window in hours"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "On-chain DEX Whale Swaps",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "audit_cluster_insider_buying",
+  "title": "Cluster Insider Buying",
+  "description": "Cluster insider buying audit identifying multiple distinct company executives or directors purchasing stock within a synchronized window versus routine or isolated transactions. Sourced from securities regulatory filings of insider transactions. Read-only evidence.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Stock ticker, e.g. MDLN, CRWV, AAPL (optional)"
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 50,
+     "default": 10
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Cluster Insider Buying",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_committee_conflict_map",
+  "title": "Congress Trades Near Federal Contracts",
+  "description": "Deterministic factual alignment between congressional committee jurisdictions, lawmaker stock transactions, and federal agency contract awards. Sourced from official House and Senate disclosures and federal procurement registries. Read-only evidence.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Stock ticker, e.g. LMT, RTX, PLTR"
+    },
+    "politician_slug": {
+     "type": "string",
+     "description": "Politician slug identifier"
+    },
+    "max_overlap_days": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 365,
+     "default": 180
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 50,
+     "default": 25
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Congress Trades Near Federal Contracts",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "scan_crypto_patterns",
+  "title": "Crypto Chart Pattern Signals",
+  "description": "Quantitative cryptocurrency chart pattern detection identifying technical formations, direction, and probabilistic confidence scores across major trading pairs (34 crypto pairs only). With an API-plan key each pattern also carries reference levels (entry/target/invalidation) and a price zone (high/low) for charting overlays; these describe the detected formation and are not trade recommendations. Read-only evidence.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "symbol": {
+     "type": "string",
+     "default": "BTC/USDT",
+     "description": "Trading pair, e.g. BTC/USDT, ETH/USDT"
+    },
+    "timeframe": {
+     "type": "string",
+     "default": "4h",
+     "enum": [
+      "15m",
+      "1h",
+      "4h",
+      "1d",
+      "1w"
+     ],
+     "description": "Chart timeframe"
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 25,
+     "default": 10
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Crypto Chart Pattern Signals",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_physical_footprint",
+  "title": "Physical Infrastructure Footprint",
+  "description": "Physical-infrastructure footprint of one US-listed company: data-center build permits, power plant pipeline and regional grid load for the sites tied to the company, as publicly known on the as_of date. Counts (site_count, plant_count, event_count_365d) plus site and plant lists, newest first. capacity: permitted backup generator capacity in MW per site (an upper bound on onsite backup power, not IT load; lower_bound_sites counts sites where the figure is a floor because part of the permit is not yet itemised). trade_context: US imports of the goods tied to the company (by 6-digit HS code and country of origin), labelled sector_context_not_company: industry context, not the company's own revenue or purchases; about 11 tickers have no linked goods and return available=false. land_records: U.S. county land-use and building records (one county so far, starting 20 October 2026) for data-center land parcels held by the company's legal entities and the permitted data-center buildings on them (every original record field, permit number, issue date, floor area, build status, owner), plus planned data-center project areas within 300 m of its sites; each row is the version as first seen on or before as_of. Locations are as published; grid load is regional, not per site; fields not yet measured are null. Read-only evidence.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "ticker"
+   ],
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Stock ticker, e.g. AMZN, MSFT, NEE"
+    },
+    "as_of": {
+     "type": "string",
+     "description": "Optional date YYYY-MM-DD (default today): footprint as publicly known on that date"
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 100,
+     "default": 25,
+     "description": "Max sites / plants listed (counts always cover all)"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Physical Infrastructure Footprint",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "search_management_promises",
+  "title": "Search Management Promises",
+  "description": "Search quantifiable management commitments by company ticker, claim category/taxonomy, or realization status. Returns verifiable quotes, deadline windows, targets, and source regulatory filing / investor-relations document citations.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Stock ticker symbol, e.g. NVDA or TSLA"
+    },
+    "promise_type": {
+     "type": "string",
+     "description": "Category or taxonomy code, e.g. FIN-REV, OPS-RAMP, PROD-LAUNCH, TECH-AI-CLUSTER"
+    },
+    "status": {
+     "type": "string",
+     "enum": [
+      "pending",
+      "achieved",
+      "missed",
+      "retracted",
+      "unverifiable"
+     ],
+     "description": "Realization status"
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 100,
+     "default": 20,
+     "description": "Maximum number of claims to return"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Search Management Promises",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_open_promises",
+  "title": "Get Open Corporate Promises",
+  "description": "Retrieve all pending active commitments and upcoming deadlines for a company or category. Sorted by target deadline date to identify upcoming catalysts and delivery checkpoints.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Stock ticker, e.g. PLTR"
+    },
+    "category": {
+     "type": "string",
+     "description": "Filter by claim category, e.g. financial, operational, product, technology"
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 100,
+     "default": 25
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Get Open Corporate Promises",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_overdue_promises",
+  "title": "Get Overdue Promises",
+  "description": "List commitments that have passed their stated target deadline without verified delivery or resolution. Includes calculated delay severity (days overdue) and original executive quotes.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Stock ticker symbol, e.g. INTC"
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 100,
+     "default": 25
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Get Overdue Promises",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_management_credibility",
+  "title": "Person & Management Credibility Dossier",
+  "description": "Get comprehensive execution track record and credibility scores for a corporate management team, individual executive (CEO/CFO), or public politician (e.g. Nancy Pelosi, Donald Trump). Returns person-centric credibility dossier, STOCK Act trade telemetry or corporate tenures, legislative commitments or guidance promises, and receipts breakdown.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Company stock ticker, e.g. NVDA or TSLA"
+    },
+    "person_slug": {
+     "type": "string",
+     "description": "Individual slug identifier for executive or politician (e.g. jensen-huang, nancy-pelosi, donald-trump, elon-musk)"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Person & Management Credibility Dossier",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "compare_management_teams",
+  "title": "Compare Management Teams",
+  "description": "Side-by-side comparative execution analysis across multiple companies or peer group competitors. Compares realization rates, guidance accuracy, miss rates, and total historical claims.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "tickers"
+   ],
+   "properties": {
+    "tickers": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "minItems": 2,
+     "maxItems": 10,
+     "description": "List of company tickers to compare, e.g. [\"NVDA\", \"INTC\", \"AMD\"]"
+    },
+    "category": {
+     "type": "string",
+     "description": "Optional category filter, e.g. financial_guidance or product_milestone"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Compare Management Teams",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_claim_history",
+  "title": "Get Claim Evolution History",
+  "description": "Inspect the complete chronological evolution chain (Promise Chain) of a specific corporate claim from inception to outcome. Shows initial statement, subsequent reaffirmations, revisions/delays, linked external evidence, and final verification outcome.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "claim_id"
+   ],
+   "properties": {
+    "claim_id": {
+     "type": "string",
+     "description": "UUID identifier of the claim"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Get Claim Evolution History",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "verify_claim",
+  "title": "Verify Claim Evidence",
+  "description": "Verify a management claim against the independent External Evidence Graph. Returns supporting filings, government contract awards, patent grants, trade disclosures, and flags any contradicting empirical indicators.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "claim_id"
+   ],
+   "properties": {
+    "claim_id": {
+     "type": "string",
+     "description": "UUID of the claim to verify"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Verify Claim Evidence",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_language_drift",
+  "title": "Language Drift & Semantic Retreat",
+  "description": "Measure corporate language retreat and semantic hedging over sequential quarters. Identifies silent guidance dilution, hedging markers, and early warning alerts before formal deadline slips are filed.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "ticker"
+   ],
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Stock ticker symbol, e.g. TSLA"
+    },
+    "topic": {
+     "type": "string",
+     "description": "Optional topic/taxonomy filter, e.g. OPS-RAMP or PROD-LAUNCH"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Language Drift & Semantic Retreat",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_guidance_accuracy",
+  "title": "Guidance Accuracy & Bias History",
+  "description": "Historical track record of management financial guidance vs actual reported results. Calculates average absolute variance percentage, guidance accuracy score (0-100), and systematic overpromising or conservative bias.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "ticker"
+   ],
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Stock ticker symbol, e.g. AAPL"
+    },
+    "quarters": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 40,
+     "default": 8,
+     "description": "Number of historical quarters to analyze"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Guidance Accuracy & Bias History",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "search_accountability_people",
+  "title": "Search Accountability People (Execs & Politicians)",
+  "description": "Search public figures (corporate executives, politicians, and regulators) by name, slug, or congressional member ID. Returns person-centric profile with roles, party affiliation, and track record metrics (bills sponsored, realization rate, broken promises).",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "query": {
+     "type": "string",
+     "description": "Name, slug, congressional member ID, or CIK to search for, e.g. \"Trump\", \"Nancy Pelosi\", \"Jensen Huang\""
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 50,
+     "default": 20,
+     "description": "Maximum number of people to return"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Search Accountability People (Execs & Politicians)",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_upcoming_catalysts",
+  "title": "Upcoming Catalysts & Scheduled Events",
+  "description": "Query upcoming high-impact catalysts and macro events scheduled or anticipated across 4 Event Classes (SCHEDULED, PRECURSOR, DEADLINE, UNEXPECTED). Returns event time, priority score, and impacted tickers.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "event_class": {
+     "type": "string",
+     "enum": [
+      "SCHEDULED",
+      "PRECURSOR",
+      "DEADLINE",
+      "UNEXPECTED"
+     ],
+     "description": "Filter by event classification"
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 100,
+     "default": 20,
+     "description": "Maximum number of catalysts to return"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Upcoming Catalysts & Scheduled Events",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_breakout_watch",
+  "title": "Breakout Watch Scored Intelligence",
+  "description": "Query active Breakout Watch objects ranked by PriorityScore (BreakoutScore * Probability). Filterable by alert tier (VIRAL_BREAKOUT, HIGH_CONVICTION, ELEVATED, STANDARD).",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "alert_tier": {
+     "type": "string",
+     "enum": [
+      "VIRAL_BREAKOUT",
+      "HIGH_CONVICTION",
+      "ELEVATED",
+      "STANDARD"
+     ],
+     "description": "Alert tier filter"
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 100,
+     "default": 20
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Breakout Watch Scored Intelligence",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_precursor_signals",
+  "title": "Precursor Early Signals & Footprints",
+  "description": "Retrieve early public footprints that tend to precede market-moving events (pre-publication regulatory notices, procurement pre-solicitations, insider-filing windows, hearing dockets, scheduled data releases) with resolved tickers and confidence scores.",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Stock ticker, e.g. LMT or NVDA"
+    },
+    "precursor_type": {
+     "type": "string",
+     "enum": [
+      "FEDREG_PUBLIC_INSPECTION",
+      "SAM_PRESOLICITATION",
+      "SEC_FORM4_WINDOW",
+      "SEC_13D_SCHEDULE",
+      "CONGRESS_HEARING_DOCKET",
+      "WHITE_HOUSE_BRIEFING_TOPIC",
+      "FDA_PDUFA_CALENDAR",
+      "BLS_SCHEDULED_RELEASE"
+     ],
+     "description": "Precursor signal taxonomy"
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 100,
+     "default": 25
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Precursor Early Signals & Footprints",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_event_impact_preview",
+  "title": "Sensitivity Matrix & Market Impact Preview",
+  "description": "Pre-computed sensitivity matrix and historical precedent reaction ranges for an upcoming catalyst. Returns quantitative scenario outcomes (consensus expectations vs modeled deviation).",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "event_id": {
+     "type": "string",
+     "description": "Event UUID"
+    },
+    "slug": {
+     "type": "string",
+     "description": "Event canonical slug, e.g. us-cpi-inflation-september-2026"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Sensitivity Matrix & Market Impact Preview",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_policy_intelligence_feed",
+  "title": "Federal Policy & Executive Action Feed",
+  "description": "Stream of executive orders, trade policy actions, and regulatory mandates categorized across 6 policy pillars (Tariffs, Energy Deregulation, Defense, Crypto Strategic Reserve, Antitrust, MAHA Healthcare).",
+  "inputSchema": {
+   "type": "object",
+   "properties": {
+    "policy_pillar": {
+     "type": "string",
+     "enum": [
+      "TARIFFS_TRADE",
+      "DEREGULATION_ENERGY",
+      "DEFENSE_DOMESTIC",
+      "CRYPTO_STRATEGIC_RESERVE",
+      "BIG_TECH_ANTITRUST",
+      "PHARMA_HEALTHCARE_MAHA"
+     ],
+     "description": "Policy pillar filter"
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 100,
+     "default": 20
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Federal Policy & Executive Action Feed",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_beneficiary_tickers",
+  "title": "Policy Beneficiaries & Exposed Tickers",
+  "description": "Retrieve events and policy mandates impacting a specific stock ticker, indicating whether exposure is long-bias (Beneficiary) or short/defensive (Adverse impact).",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "ticker"
+   ],
+   "properties": {
+    "ticker": {
+     "type": "string",
+     "description": "Stock ticker, e.g. INTC or AAPL"
+    },
+    "limit": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 50,
+     "default": 10
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Policy Beneficiaries & Exposed Tickers",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "get_event_countdown",
+  "title": "Live Event Countdown & State Machine",
+  "description": "Countdown and 4-phase status (SCHEDULED, LIVE_COUNTDOWN, CONFIRMED, HISTORICAL_ARCHIVE) for a canonical event landing.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "slug"
+   ],
+   "properties": {
+    "slug": {
+     "type": "string",
+     "description": "Event slug, e.g. us-cpi-inflation-september-2026"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Live Event Countdown & State Machine",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ },
+ {
+  "name": "verify_event_status",
+  "title": "Event Official Release Status Verifier",
+  "description": "Verify whether an upcoming event has officially released its primary numbers, checking SHA-256 source fingerprints and consensus vs actual release deltas.",
+  "inputSchema": {
+   "type": "object",
+   "required": [
+    "event_id"
+   ],
+   "properties": {
+    "event_id": {
+     "type": "string",
+     "description": "Event UUID"
+    }
+   }
+  },
+  "outputSchema": {
+   "type": "object",
+   "properties": {
+    "results": {
+     "description": "Tool result payload (read-only evidence). Shape varies by tool; scoring weights are never exposed."
+    },
+    "notice": {
+     "type": "string",
+     "description": "Free-tier upgrade notice; only when results are masked/delayed."
+    },
+    "history_limit": {
+     "type": "object",
+     "description": "Present when the license limits history depth: earliest_allowed date, history_days and how many older items were removed."
+    }
+   },
+   "required": [
+    "results"
+   ],
+   "additionalProperties": false
+  },
+  "annotations": {
+   "title": "Event Official Release Status Verifier",
+   "readOnlyHint": false,
+   "openWorldHint": false,
+   "destructiveHint": false
+  }
+ }
+]
