@@ -3,7 +3,7 @@
   "name": "io.github.gemral-edge/gemral-edge",
   "title": "Gemral Edge",
   "description": "Point-in-time U.S. public records: federal contracts, congressional and insider trades, lobbying.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "repository": {
     "url": "https://github.com/gemral-edge/gemral-edge-mcp",
     "source": "github"
@@ -11,7 +11,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://pgfkbcnzqozzkohwbgbk.supabase.co/functions/v1/edge-mcp"
+      "url": "https://mcp.gemral.com/mcp"
     }
   ]
 }
